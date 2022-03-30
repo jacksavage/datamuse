@@ -114,7 +114,7 @@ class WordsSettings : CommandSettings
         if (
             MetadataFlags is not null
             && MetadataFlags.Any(f => !ValidMetadataFlags.Contains(f))
-        ) return ValidationResult.Error($"Metadata flags must be one of {list(ValidMetadataFlags)}")
+        ) return ValidationResult.Error($"Metadata flags must be one of {list(ValidMetadataFlags)}");
 
         return ValidationResult.Success();
     }
