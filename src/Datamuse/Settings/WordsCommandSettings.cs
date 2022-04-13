@@ -1,48 +1,11 @@
 using System.ComponentModel;
-
 using Spectre.Console;
 using Spectre.Console.Cli;
+
 namespace Datamuse.Settings;
 
 class WordsSettings : CommandSettings
 {
-    // valid codes for the `Vocabulary` option
-    private static readonly HashSet<string> Vocabularies = new()
-    { 
-        "es",
-        "enwiki",
-    };
-
-    // valid codes for the `Related` option
-    private static readonly HashSet<string> RelationCodes = new()
-    {
-        "jja",
-        "jjb",
-        "syn",
-        "trg",
-        "ant",
-        "spc",
-        "gen",
-        "com",
-        "par",
-        "bga",
-        "bgb",
-        "rhy",
-        "nry",
-        "hom",
-        "cns",
-    };
-
-    // valid characters for the `MetaDataFlags` option
-    private static readonly HashSet<char> ValidMetadataFlags = new()
-    {
-        'd', // definitions
-        'p', // parts of speech
-        's', // syllable count
-        'r', // pronunciation
-        'f', // word frequency
-    };
-
     [Description("Require that the results have a meaning related to this string value")]
     [CommandOption("-m,--mean")]
     public string? MeansLike { get; set; }
