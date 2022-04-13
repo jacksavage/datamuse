@@ -16,7 +16,7 @@ class SuggestCommandSettings : CommandSettings
     public int? Maximum { get; set; }
 
     [Description("Identifier for the vocabulary to use")]
-    [CommandOption("-v,--vocab")]
+    [CommandOption("-v|--vocab")]
     public string? Vocabulary { get; set; }
 
     public override ValidationResult Validate() =>

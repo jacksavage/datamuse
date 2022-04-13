@@ -7,27 +7,27 @@ namespace Datamuse.Settings;
 class WordsSettings : CommandSettings
 {
     [Description("Require that the results have a meaning related to this string value")]
-    [CommandOption("-m,--mean")]
+    [CommandOption("-m|--mean")]
     public string? MeansLike { get; set; }
 
     [Description("Require that the results are pronounced similarly to this string of characters")]
-    [CommandOption("-s,--sound")]
+    [CommandOption("-s|--sound")]
     public string? SoundsLike { get; set; }
 
     [Description("Require that the results are spelled similarly to this string of characters")]
-    [CommandOption("-p,--spell")]
+    [CommandOption("-p|--spell")]
     public string? SpelledLike { get; set; }
 
     [Description("Require that the results are in a predefined lexical relation to a word")]
-    [CommandOption("-r,--related")]
+    [CommandOption("-r|--related")]
     public (string Code, string Word)[]? Related { get; set; }
 
     [Description("Identifier for the vocabulary to use")]
-    [CommandOption("-v,--vocab")]
+    [CommandOption("-v|--vocab")]
     public string? Vocabulary { get; set; }
 
     [Description("Up to five hints about the theme of the document being written")]
-    [CommandOption("-t,--topics")]
+    [CommandOption("-t|--topics")]
     public string[]? Topics { get; set; }
 
     [Description("A hint about the word that appears immediately to the left of the target word in a sentence")]
@@ -48,7 +48,7 @@ class WordsSettings : CommandSettings
     public string? MetadataFlags { get; set; }
 
     [Description("Prepend a result to the output that describes the query string from some other parameter")]
-    [CommandOption("-e,--query-echo")]
+    [CommandOption("-e|--query-echo")]
     public string? QueryEcho { get; set; }
 
     public override ValidationResult Validate() => 
