@@ -51,13 +51,11 @@ class WordsSettings : CommandSettings
     [CommandOption("-e,--query-echo")]
     public string? QueryEcho { get; set; }
 
-    public override ValidationResult Validate()
-    {
-        Validation.ValidateRelationCodes(Related);
-        Validation.ValidateVocabulary(Vocabulary);
-        Validation.ValidateMetaDataFlags(MetadataFlags);
-        Validation.ValidateMaximum(Maximum);
-
-        return ValidationResult.Success();
-    }
+    public override ValidationResult Validate() => 
+        Validation.ValidateUntilError(new[] {
+            () => Validation.ValidateRelationCodes(Related),
+            () => Validation.ValidateVocabulary(Vocabulary),
+            () => Validation.ValidateMetaDataFlags(MetadataFlags),
+            () => Validation.ValidateMaximum(Maximum),
+        });
 }

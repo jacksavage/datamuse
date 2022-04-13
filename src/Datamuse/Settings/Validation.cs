@@ -84,4 +84,15 @@ static class Validation
 
         return ValidationResult.Success();
     }
+
+    public static ValidationResult ValidateUntilError(IEnumerable<Func<ValidationResult>> validations)
+    {
+        foreach (var validation in validations)
+        {
+            ValidationResult validationResult = validation.Invoke();
+            if (!validationResult.Successful) return validationResult;
+        }
+
+        return ValidationResult.Success();
+    }
 }
