@@ -53,10 +53,10 @@ class WordsSettings : CommandSettings
 
     public override ValidationResult Validate()
     {
-        SettingsResources.ValidateRelationCodes(Related);
-        SettingsResources.ValidateVocabulary(Vocabulary);
-        SettingsResources.ValidateMetaDataFlags(MetadataFlags);
-        SettingsResources.ValidateMaximum(Maximum);
+        Validation.ValidateRelationCodes(Related);
+        Validation.ValidateVocabulary(Vocabulary);
+        Validation.ValidateMetaDataFlags(MetadataFlags);
+        Validation.ValidateMaximum(Maximum);
 
         return ValidationResult.Success();
     }

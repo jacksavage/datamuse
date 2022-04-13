@@ -2,7 +2,7 @@ using Spectre.Console;
 
 namespace Datamuse.Settings;
 
-static class SettingsResources
+static class Validation
 {
     // valid codes for the `Vocabulary` option
     static readonly HashSet<string> Vocabularies = new()
@@ -48,8 +48,8 @@ static class SettingsResources
     {
         if (
             vocabulary is not null
-            && !SettingsResources.Vocabularies.Contains(vocabulary.ToLower())
-        ) return ValidationResult.Error($"Vocabulary must be one of {PrintList(SettingsResources.Vocabularies)}");
+            && !Validation.Vocabularies.Contains(vocabulary.ToLower())
+        ) return ValidationResult.Error($"Vocabulary must be one of {PrintList(Validation.Vocabularies)}");
 
         return ValidationResult.Success();
     }
@@ -58,8 +58,8 @@ static class SettingsResources
     {
         if (
             relations is not null
-            && relations.Any(r => !SettingsResources.RelationCodes.Contains(r.Code))
-        ) return ValidationResult.Error($"Relation codes must be one of {PrintList(SettingsResources.RelationCodes)}");
+            && relations.Any(r => !Validation.RelationCodes.Contains(r.Code))
+        ) return ValidationResult.Error($"Relation codes must be one of {PrintList(Validation.RelationCodes)}");
 
         return ValidationResult.Success();
     }
@@ -68,8 +68,8 @@ static class SettingsResources
     {
         if (
             metadataFlags is not null
-            && metadataFlags.Any(f => !SettingsResources.ValidMetadataFlags.Contains(f))
-        ) return ValidationResult.Error($"Metadata flags must be one of {PrintList(SettingsResources.ValidMetadataFlags)}");
+            && metadataFlags.Any(f => !Validation.ValidMetadataFlags.Contains(f))
+        ) return ValidationResult.Error($"Metadata flags must be one of {PrintList(Validation.ValidMetadataFlags)}");
 
         return ValidationResult.Success();
     }
