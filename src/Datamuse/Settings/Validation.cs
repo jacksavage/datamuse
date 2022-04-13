@@ -1,3 +1,5 @@
+using System.Text;
+
 using Spectre.Console;
 
 namespace Datamuse.Settings;
@@ -41,15 +43,32 @@ static class Validation
         'f', // word frequency
     };
 
-    static string PrintList<T>(IEnumerable<T> items) =>
-        string.Join(", ", items);
+    static string PrintList<T>(IEnumerable<T> items)
+    {
+        static string quote<U>(U source) => $"'{source}'";
+
+        var itemsE = items.GetEnumerator();
+        if (!itemsE.MoveNext()) return "";
+        StringBuilder sb = new($"{quote(itemsE.Current)}, ");
+
+        int len = items.Count();
+        for (int i = 1; i < len; i++)
+        {
+            itemsE.MoveNext();
+            
+            if (i == len - 1) sb.Append($" or {quote(itemsE.Current)}");
+            else sb.Append($"{quote(itemsE.Current)}, ");
+        }
+
+        return sb.ToString();
+    }
 
     public static ValidationResult ValidateVocabulary(string? vocabulary)
     {
         if (
             vocabulary is not null
             && !Validation.Vocabularies.Contains(vocabulary.ToLower())
-        ) return ValidationResult.Error($"Vocabulary must be one of {PrintList(Validation.Vocabularies)}");
+        ) return ValidationResult.Error($"Vocabulary can only be {PrintList(Validation.Vocabularies)}");
 
         return ValidationResult.Success();
     }
@@ -59,7 +78,7 @@ static class Validation
         if (
             relations is not null
             && relations.Any(r => !Validation.RelationCodes.Contains(r.Code))
-        ) return ValidationResult.Error($"Relation codes must be one of {PrintList(Validation.RelationCodes)}");
+        ) return ValidationResult.Error($"Relation codes can only be {PrintList(Validation.RelationCodes)}");
 
         return ValidationResult.Success();
     }
@@ -69,7 +88,7 @@ static class Validation
         if (
             metadataFlags is not null
             && metadataFlags.Any(f => !Validation.ValidMetadataFlags.Contains(f))
-        ) return ValidationResult.Error($"Metadata flags must be one of {PrintList(Validation.ValidMetadataFlags)}");
+        ) return ValidationResult.Error($"Metadata flags can only be {PrintList(Validation.ValidMetadataFlags)}");
 
         return ValidationResult.Success();
     }
