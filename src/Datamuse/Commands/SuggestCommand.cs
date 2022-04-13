@@ -9,7 +9,7 @@ class SuggestCommand : Command<SuggestCommandSettings>
 {
     public override int Execute([NotNull] CommandContext context, [NotNull] SuggestCommandSettings settings)
     {
-        AnsiConsole.WriteLine($"HintString : {settings.HintString}");
+        AnsiConsole.WriteLine($"Hint : {settings.Hint}");
         AnsiConsole.WriteLine($"Maximum : {settings.Maximum}");
         AnsiConsole.WriteLine($"Vocabulary : {settings.Vocabulary}");
 
