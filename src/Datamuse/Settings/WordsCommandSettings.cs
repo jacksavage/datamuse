@@ -53,31 +53,10 @@ class WordsSettings : CommandSettings
 
     public override ValidationResult Validate()
     {
-        static string list<T>(IEnumerable<T> items) =>
-            string.Join(", ", items);
-
-        // valid vocabulary
-        if (
-            Vocabulary is not null
-            && !SettingsResources.Vocabularies.Contains(Vocabulary.ToLower())
-        ) return ValidationResult.Error($"Vocabulary must be one of {list(SettingsResources.Vocabularies)}");
-
-        // valid relation code
-        if (
-            Related is not null
-            && Related.Any(r => !SettingsResources.RelationCodes.Contains(r.Code))
-        ) return ValidationResult.Error($"Relation codes must be one of {list(SettingsResources.RelationCodes)}");
-
-        // valid maximum
-        const int maxMax = 1000;
-        if (Maximum is not null && (Maximum < 0 || Maximum > maxMax))
-            return ValidationResult.Error($"Maximum must be non-negative and less than {maxMax}");
-
-        // valid metadata flags
-        if (
-            MetadataFlags is not null
-            && MetadataFlags.Any(f => !SettingsResources.ValidMetadataFlags.Contains(f))
-        ) return ValidationResult.Error($"Metadata flags must be one of {list(SettingsResources.ValidMetadataFlags)}");
+        SettingsResources.ValidateRelationCodes(Related);
+        SettingsResources.ValidateVocabulary(Vocabulary);
+        SettingsResources.ValidateMetaDataFlags(MetadataFlags);
+        SettingsResources.ValidateMaximum(Maximum);
 
         return ValidationResult.Success();
     }
