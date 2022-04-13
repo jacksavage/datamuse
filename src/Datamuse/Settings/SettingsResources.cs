@@ -1,6 +1,6 @@
 namespace Datamuse.Settings;
 
-class SettingsResources
+static class SettingsResources
 {
     // valid codes for the `Vocabulary` option
     public static readonly HashSet<string> Vocabularies = new()

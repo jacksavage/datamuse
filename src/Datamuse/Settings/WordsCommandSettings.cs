@@ -59,14 +59,14 @@ class WordsSettings : CommandSettings
         // valid vocabulary
         if (
             Vocabulary is not null
-            && !Vocabularies.Contains(Vocabulary.ToLower())
-        ) return ValidationResult.Error($"Vocabulary must be one of {list(Vocabularies)}");
+            && !SettingsResources.Vocabularies.Contains(Vocabulary.ToLower())
+        ) return ValidationResult.Error($"Vocabulary must be one of {list(SettingsResources.Vocabularies)}");
 
         // valid relation code
         if (
             Related is not null
-            && Related.Any(r => !RelationCodes.Contains(r.Code))
-        ) return ValidationResult.Error($"Relation codes must be one of {list(RelationCodes)}");
+            && Related.Any(r => !SettingsResources.RelationCodes.Contains(r.Code))
+        ) return ValidationResult.Error($"Relation codes must be one of {list(SettingsResources.RelationCodes)}");
 
         // valid maximum
         const int maxMax = 1000;
@@ -76,8 +76,8 @@ class WordsSettings : CommandSettings
         // valid metadata flags
         if (
             MetadataFlags is not null
-            && MetadataFlags.Any(f => !ValidMetadataFlags.Contains(f))
-        ) return ValidationResult.Error($"Metadata flags must be one of {list(ValidMetadataFlags)}");
+            && MetadataFlags.Any(f => !SettingsResources.ValidMetadataFlags.Contains(f))
+        ) return ValidationResult.Error($"Metadata flags must be one of {list(SettingsResources.ValidMetadataFlags)}");
 
         return ValidationResult.Success();
     }
