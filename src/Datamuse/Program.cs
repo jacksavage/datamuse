@@ -1,8 +1,14 @@
 ﻿using Datamuse.Commands;
+using Datamuse.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console.Cli;
 
+// register dependencies
+var registrations = new ServiceCollection();
+var registrar = new TypeRegistrar(registrations);
+
 // configure the application
-CommandApp app = new();
+CommandApp app = new(registrar);
 app.Configure(config =>
 {
 #if DEBUG
