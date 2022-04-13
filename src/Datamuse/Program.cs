@@ -1,10 +1,12 @@
 ﻿using Datamuse.Commands;
 using Datamuse.Infrastructure;
+using Datamuse.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console.Cli;
 
 // register dependencies
 var registrations = new ServiceCollection();
+registrations.AddSingleton<IApiService, ApiService>(prov => new ApiService("https://api.datamuse.com"));
 var registrar = new TypeRegistrar(registrations);
 
 // configure the application
