@@ -51,6 +51,10 @@ class WordsSettings : CommandSettings
     [CommandOption("-e|--query-echo")]
     public string? QueryEcho { get; set; }
 
+    [Description("Use the International Phonetic Alphabet for pronounciation metadata")]
+    [CommandOption("--ipa")]
+    public bool? PhoneticAlphabet { get; set; }
+
     public override ValidationResult Validate() => 
         Validation.ValidateUntilError(new[] {
             () => Validation.ValidateRelationCodes(Related),

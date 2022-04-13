@@ -20,6 +20,7 @@ class WordsCommand : Command<WordsSettings>
         AnsiConsole.WriteLine($"Maximum : {settings.Maximum}");
         AnsiConsole.WriteLine($"MetadataFlags : {settings.MetadataFlags}");
         AnsiConsole.WriteLine($"QueryEcho : {settings.QueryEcho}");
+        AnsiConsole.WriteLine($"PhoneticAlphabet : {settings.PhoneticAlphabet}");
 
         return 0;
     }
