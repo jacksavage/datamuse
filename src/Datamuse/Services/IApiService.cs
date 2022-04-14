@@ -1,7 +1,9 @@
+using Datamuse.Settings;
+
 namespace Datamuse.Services;
 
 interface IApiService
 {
-    string GetSuggestions();
-    string GetWords();
+    string GetSuggestions(SuggestCommandSettings settings);
+    string GetWords(WordsCommandSettings settings);
 }

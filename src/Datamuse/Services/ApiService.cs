@@ -1,3 +1,5 @@
+using Datamuse.Settings;
+
 namespace Datamuse.Services;
 
 class ApiService : IApiService
@@ -10,12 +12,12 @@ class ApiService : IApiService
         _httpClient.BaseAddress = new Uri(address);
     }
 
-    public string GetWords()
+    public string GetWords(WordsCommandSettings settings)
     {
         return _httpClient.GetStringAsync("/words?ml=ringing+in+the+ears").Result;
     }
 
-    public string GetSuggestions()
+    public string GetSuggestions(SuggestCommandSettings settings)
     {
         return _httpClient.GetStringAsync("/sug?s=rawand").Result;
     }
