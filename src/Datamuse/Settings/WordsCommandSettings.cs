@@ -4,7 +4,7 @@ using Spectre.Console.Cli;
 
 namespace Datamuse.Settings;
 
-class WordsSettings : CommandSettings
+class WordsCommandSettings : CommandSettings
 {
     [Description("Require that the results have a meaning related to this string value")]
     [CommandOption("-m|--mean")]

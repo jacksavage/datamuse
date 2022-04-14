@@ -6,7 +6,7 @@ using Datamuse.Services;
 
 namespace Datamuse.Commands;
 
-class WordsCommand : Command<WordsSettings>
+class WordsCommand : Command<WordsCommandSettings>
 {
     private readonly IApiService _apiService;
 
@@ -15,9 +15,10 @@ class WordsCommand : Command<WordsSettings>
         _apiService = apiService;
     }
 
-    public override int Execute([NotNull] CommandContext context, [NotNull] WordsSettings settings)
+    public override int Execute([NotNull] CommandContext context, [NotNull] WordsCommandSettings settings)
     {
-        AnsiConsole.WriteLine(_apiService.GetWords());
+        string response = _apiService.GetWords(settings);
+        AnsiConsole.WriteLine(response);
 
         return 0;
     }
