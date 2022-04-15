@@ -17,9 +17,18 @@ class SuggestCommand : Command<SuggestCommandSettings>
 
     public override int Execute([NotNull] CommandContext context, [NotNull] SuggestCommandSettings settings)
     {
-        string response = _apiService.GetSuggestions(settings);
-        AnsiConsole.WriteLine(response);
+        // map settings to request parameter keys
+        Dictionary<string, string> parameters = new()
+        {
 
+        };
+
+        // get the suggestions and check for success
+        string? response = _apiService.GetSuggestions(parameters);
+        if (response is null) return 1;
+
+        // print the response to the user
+        AnsiConsole.WriteLine(response);
         return 0;
     }
 }
