@@ -1,5 +1,3 @@
-using Datamuse.Settings;
-
 namespace Datamuse.Services;
 
 interface IApiService
