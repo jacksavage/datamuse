@@ -18,20 +18,8 @@ class ApiService : IApiService
 
     string? GetResource(string endpoint, IEnumerable<KeyValuePair<string, string>> parameters)
     {
-        // https://stackoverflow.com/a/47902348
-        // setup the request
-        HttpRequestMessage request = new(HttpMethod.Get, endpoint)
-        {
-            Content = new FormUrlEncodedContent(parameters),
-        };
-        
-        // make the request and check for success
-        using HttpResponseMessage response = _httpClient.Send(request);
-        if (!response.IsSuccessStatusCode) return null;
-
-        // read the content as a string
-        Stream stream = response.Content.ReadAsStream();
-        using StreamReader reader = new(stream);
-        return reader.ReadToEnd();
+        // make the request
+        string joined = string.Join("&", parameters.Select(kvp => $"{kvp.Key}={kvp.Value}"));
+        return _httpClient.GetStringAsync($"{endpoint}?{joined}").Result;
     }
 }
