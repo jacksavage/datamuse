@@ -1,9 +1,10 @@
 using Datamuse.Models;
+using Datamuse.Settings;
 
 namespace Datamuse.Services;
 
 interface IApiService
 {
-    Result[]? GetSuggestions(IEnumerable<KeyValuePair<string, string>> parameters);
-    Result[]? GetWords(IEnumerable<KeyValuePair<string, string>> parameters);
+    Result[]? GetSuggestions(SuggestCommandSettings settings);
+    Result[]? GetWords(WordsCommandSettings settings);
 }
