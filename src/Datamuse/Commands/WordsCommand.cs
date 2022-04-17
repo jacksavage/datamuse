@@ -3,6 +3,7 @@ using Datamuse.Settings;
 using System.Diagnostics.CodeAnalysis;
 using Spectre.Console;
 using Datamuse.Services;
+using Datamuse.Models;
 
 namespace Datamuse.Commands;
 
@@ -41,11 +42,12 @@ class WordsCommand : Command<WordsCommandSettings>
         add("qe", settings.QueryEcho);
 
         // get the words and check for success
-        string? response = _apiService.GetWords(parameters);
+        Result[]? response = _apiService.GetWords(parameters);
         if (response is null) return 1;
 
         // print the response to the user
-        AnsiConsole.WriteLine(response);
+        string print = string.Join("\n", response.Select(r => r.Word ?? ""));
+        AnsiConsole.WriteLine(print);
         return 0;
     }
 }

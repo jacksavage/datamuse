@@ -1,3 +1,6 @@
+using System.Net.Http.Json;
+using Datamuse.Models;
+
 namespace Datamuse.Services;
 
 class ApiService : IApiService
@@ -10,16 +13,16 @@ class ApiService : IApiService
         _httpClient.BaseAddress = new Uri(address);
     }
 
-    public string? GetWords(IEnumerable<KeyValuePair<string, string>> parameters) =>
+    public Result[]? GetWords(IEnumerable<KeyValuePair<string, string>> parameters) =>
         GetResource("/words", parameters);
 
-    public string? GetSuggestions(IEnumerable<KeyValuePair<string, string>> parameters) =>
+    public Result[]? GetSuggestions(IEnumerable<KeyValuePair<string, string>> parameters) =>
         GetResource("/sug", parameters);
 
-    string? GetResource(string endpoint, IEnumerable<KeyValuePair<string, string>> parameters)
+    Result[]? GetResource(string endpoint, IEnumerable<KeyValuePair<string, string>> parameters)
     {
         // make the request
         string joined = string.Join("&", parameters.Select(kvp => $"{kvp.Key}={kvp.Value}"));
-        return _httpClient.GetStringAsync($"{endpoint}?{joined}").Result;
+        return _httpClient.GetFromJsonAsync<Result[]>($"{endpoint}?{joined}").Result;
     }
 }
