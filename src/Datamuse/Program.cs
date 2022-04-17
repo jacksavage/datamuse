@@ -26,7 +26,7 @@ app.Configure(config =>
 
     // add the suggest command
     config
-        .AddCommand<SuggestCommand>("sug")
+        .AddCommand<SuggestCommand>("suggest")
         .WithAlias("s")
         .WithDescription("Provides word suggestions given a partially-entered query.");
 });
