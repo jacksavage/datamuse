@@ -23,8 +23,15 @@ class WordsCommand : Command<WordsCommandSettings>
         if (response is null) return 1;
 
         // print the response to the user
-        string print = string.Join("\n", response.Select(r => r.Word ?? ""));
-        AnsiConsole.WriteLine(print);
-        return 0;
+        string selection = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+            .AddChoices(
+                response
+                .Where(r => !string.IsNullOrWhiteSpace(r.Word))
+                .Select(r => r.Word!)
+        ));
+
+        WordsCommandSettings newSettings = new() { MeansLike = selection };
+        return new WordsCommand(_apiService).Execute(context, newSettings);
     }
 }
