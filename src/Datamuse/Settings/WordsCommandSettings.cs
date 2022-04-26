@@ -56,7 +56,7 @@ class WordsCommandSettings : CommandSettings
     public bool? PhoneticAlphabet { get; set; }
 
     public override ValidationResult Validate() => 
-        Validation.ValidateUntilError(new[] {
+        Validation.ValidateUntilError(new Func<ValidationResult>[] {
             () => Validation.ValidateRelationCodes(Related),
             () => Validation.ValidateVocabulary(Vocabulary),
             () => Validation.ValidateMetaDataFlags(MetadataFlags),

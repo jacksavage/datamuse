@@ -20,7 +20,7 @@ class SuggestCommandSettings : CommandSettings
     public string? Vocabulary { get; set; }
 
     public override ValidationResult Validate() =>
-        Validation.ValidateUntilError(new[] {
+        Validation.ValidateUntilError(new Func<ValidationResult>[] {
             () => Validation.ValidateMaximum(Maximum),
             () => Validation.ValidateVocabulary(Vocabulary),
         });
